@@ -13,7 +13,7 @@ image:
 imagePullSecrets:
   - name: dockerhub
 
-revisionHistoryLimit: 1
+revisionHistoryLimit: 0
 
 nameOverride: ""
 fullnameOverride: ""
