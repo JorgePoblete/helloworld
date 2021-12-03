@@ -8,10 +8,12 @@ image:
   repository: jorgepoblete/helloworld
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest4"
+  tag: "latest5"
 
 imagePullSecrets:
   - name: dockerhub
+
+revisionHistoryLimit: 1
 
 nameOverride: ""
 fullnameOverride: ""
