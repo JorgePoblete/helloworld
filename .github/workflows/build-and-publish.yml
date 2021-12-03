@@ -38,7 +38,7 @@ jobs:
           # path to dockerfile
           file: ./docker/dockerfile
           # Note: tags has to be all lower-case
-          tags: jorgepoblete/helloworld:latest
+          tags: jorgepoblete/helloworld:latest2
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
