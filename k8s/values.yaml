@@ -46,8 +46,8 @@ ingress:
     # kubernetes.io/ingress.class: traefik
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: helloworld.jpoblete.cl
-      paths: ['/']
+    - host: api.jpoblete.cl
+      paths: ['/helloworld']
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

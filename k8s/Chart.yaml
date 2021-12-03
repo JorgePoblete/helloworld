@@ -1,6 +1,6 @@
 apiVersion: v2
-name: k8s
-description: A Helm chart for Kubernetes
+name: helloworld
+description: a simple http server that greets everyone
 
 # A chart can be either an 'application' or a 'library' chart.
 #
