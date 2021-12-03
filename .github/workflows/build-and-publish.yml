@@ -18,6 +18,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      
+      - name: Set variables
+        run: |
+          VER=$(cat k8s/values.yaml| grep tag: | awk '{print $2}' | sed 's/"//g')
+          echo "VERSION=$VER" >> $GITHUB_ENV
 
       # setup Docker build action
       - name: Set up Docker Buildx
@@ -38,7 +43,7 @@ jobs:
           # path to dockerfile
           file: ./docker/dockerfile
           # Note: tags has to be all lower-case
-          tags: jorgepoblete/helloworld:latest2
+          tags: jorgepoblete/helloworld:${{ env.VERSION }}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
