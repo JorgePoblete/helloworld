@@ -1,9 +1,19 @@
 FROM golang:1.17 as builder
 
 COPY ./ .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o /app.linux main.go
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -v -o /app.aarch64 main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o /app.x86_64 main.go
+RUN CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -v -o /app.i386 main.go
 
 FROM alpine:3.15
+
 WORKDIR /home/user/app/
-COPY --from=builder /app.linux .
-CMD ["./app.linux"]
+
+COPY --from=builder /app.aarch64 .
+COPY --from=builder /app.x86_64 .
+COPY --from=builder /app.i386 .
+
+COPY ./docker/run.sh .
+
+CMD ["./run.sh"]
