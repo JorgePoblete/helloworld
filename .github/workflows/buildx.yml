@@ -41,10 +41,10 @@ jobs:
     - name: Docker Buildx (no push)
       run: |
         docker buildx bake \
-          --set ${{ github.event.repository.name }}.platform=${{ steps.prepare.outputs.docker_platforms }} \
-          --set ${{ github.event.repository.name }}.output=type=image,push=false \
-          --set ${{ github.event.repository.name }}.tags="${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}" \
-          --file ./docker/dockerfile
+          --set app.platform=${{ steps.prepare.outputs.docker_platforms }} \
+          --set app.output=type=image,push=false \
+          --set app.tags="${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}" \
+          --file ./docker/docker-compose.yml
 
     - name: Docker Login
       if: success()
@@ -57,10 +57,10 @@ jobs:
       if: success()
       run: |
         docker buildx bake \
-          --set ${{ github.event.repository.name }}.platform=${{ steps.prepare.outputs.docker_platforms }} \
-          --set ${{ github.event.repository.name }}.output=type=image,push=true \
-          --set ${{ github.event.repository.name }}.tags="${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}" \
-          --file ./docker/dockerfile
+          --set app.platform=${{ steps.prepare.outputs.docker_platforms }} \
+          --set app.output=type=image,push=true \
+          --set app.tags="${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}" \
+          --file ./docker/docker-compose.yml
 
     - name: Clear
       if: always()
