@@ -10,12 +10,17 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
+    - name: Set variables
+        run: |
+          echo "VERSION=$(cat k8s/values.yaml| grep tag: | awk '{print $2}' | sed 's/"//g')" >> $GITHUB_ENV
+          echo "REPOSITORY=$(cat k8s/values.yaml| grep repository: | awk '{print $2}' | sed 's/"//g')" >> $GITHUB_ENV
+
     - name: Prepare
       id: prepare
       run: |
         echo ::set-output name=docker_platforms::linux/amd64,linux/arm64,linux/386
-        echo ::set-output name=docker_image::$(cat k8s/values.yaml| grep repository: | awk '{print $2}' | sed 's/"//g')
-        echo ::set-output name=version::$(cat k8s/values.yaml| grep tag: | awk '{print $2}' | sed 's/"//g')
+        echo ::set-output name=docker_image::${{ env.REPOSITORY }}
+        echo ::set-output name=version::${{ env.VERSION }}
 
     # https://github.com/crazy-max/ghaction-docker-buildx
     - name: Set up Docker Buildx
