@@ -4,4 +4,4 @@ echo ./app.$(arch)
 echo "sleeping 60"
 sleep 60
 echo "runing"
-./app.$(arch)
+./app.aarch64
