@@ -10,6 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
+    - name: Checkout code
+        uses: actions/checkout@v2
+
     - name: Set variables
       run: |
         echo "VERSION=$(cat k8s/values.yaml| grep tag: | awk '{print $2}' | sed 's/"//g')" >> $GITHUB_ENV
