@@ -79,9 +79,9 @@ autoscaling:
 nodeSelector: {}
 
 tolerations:
-  - key: "key1"
+  - key: "tag"
     operator: "Equal"
-    value: "value1"
+    value: "microservice"
     effect: "NoSchedule"
 
 affinity: {}
