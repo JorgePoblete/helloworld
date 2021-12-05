@@ -70,19 +70,27 @@ resources: {}
   #   memory: 128Mi
 
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 10
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector:
-  deploytype: microservice
+nodeSelector: {}
 
 tolerations:
-  - key: "deploytype"
+  - key: "node/deploy-type"
     operator: "Equal"
     value: "microservice"
     effect: "NoSchedule"
 
-affinity: {}
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: node/deploy-type
+            operator: In
+            values:
+            - microservice
