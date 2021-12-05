@@ -80,7 +80,7 @@ nodeSelector:
   deploytype: microservice
 
 tolerations:
-  - key: "tag"
+  - key: "deploytype"
     operator: "Equal"
     value: "microservice"
     effect: "NoSchedule"
