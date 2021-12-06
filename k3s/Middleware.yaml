@@ -6,12 +6,12 @@ metadata:
     app.kubernetes.io/instance: helloworld
     app.kubernetes.io/name: helloworld
     app.kubernetes.io/version: 1.16.0
-  name: helloworld-replacepathregex
+  name: helloworld-stripprefix
   namespace: default
 spec:
-  replacePathRegex:
-    regex: ^/helloworld/(.*)
-    replacement: /$1
+  stripPrefix:
+    prefixes:
+      - /helloworld
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -30,7 +30,7 @@ spec:
     - match: Host(`api.jpoblete.cl`) && Path(`/helloworld`)
       kind: Rule
       middlewares:
-        - name: helloworld-replacepathregex
+        - name: helloworld-stripprefix
       services:
         - name: helloworld
           port: 8080
