@@ -1,3 +1,4 @@
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
@@ -11,3 +12,25 @@ spec:
   replacePathRegex:
     regex: ^/helloworld/(.*)
     replacement: /$1
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: helloworld
+    app.kubernetes.io/name: helloworld
+    app.kubernetes.io/version: 1.16.0
+  name: helloworld
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`api.jpoblete.cl`) && Path(`/helloworld`)
+      kind: Rule
+      middlewares:
+        - name: helloworld-replacepathregex
+      services:
+        - name: helloworld
+          port: 8080
