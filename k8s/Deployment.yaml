@@ -31,7 +31,7 @@ spec:
                       - microservice
               weight: 1
       containers:
-        - image: 'jorgepoblete/helloworld:1.0.13'
+        - image: "jorgepoblete/helloworld:1.0.13"
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

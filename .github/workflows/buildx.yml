@@ -15,8 +15,8 @@ jobs:
 
     - name: Set variables
       run: |
-        echo "VERSION=$(cat k8s/values.yaml| grep tag: | awk '{print $2}' | sed 's/"//g')" >> $GITHUB_ENV
-        echo "REPOSITORY=$(cat k8s/values.yaml| grep repository: | awk '{print $2}' | sed 's/"//g')" >> $GITHUB_ENV
+        echo "VERSION=$(cat k8s/Deployment.yaml| grep image: | awk '{print $3}' | sed 's/"//g' | sed 's/.*://g')" >> $GITHUB_ENV
+        echo "REPOSITORY=$(cat k8s/Deployment.yaml| grep image: | awk '{print $3}' | sed 's/"//g' | sed 's/:.*//g')" >> $GITHUB_ENV
 
     - name: Prepare
       id: prepare
