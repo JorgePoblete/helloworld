@@ -55,11 +55,11 @@ ingress:
   hosts:
     - host: api.jpoblete.cl
       http:
-      paths:
-      - path: /helloworld
-        backend:
-          serviceName: helloworld
-          servicePort: 8080
+        paths: /
+        - path: /helloworld
+          backend:
+            serviceName: helloworld
+            servicePort: http
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
