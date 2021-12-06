@@ -5,10 +5,9 @@ ARG TARGETARCH
 ARG TARGETOS
 ARG BUILDPLATFORM
 
-COPY ./ .
-RUN unset GOPATH
+WORKDIR /go/src/github.com/JorgePoblete/helloworld
 
-ENV GO111MODULE=on
+COPY ./ .
 
 RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM, with GOOS=$TARGETOS GOARCH=$TARGETARCH"
 
