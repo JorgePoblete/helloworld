@@ -54,7 +54,12 @@ ingress:
     traefik.ingress.kubernetes.io/rewrite-target: /
   hosts:
     - host: api.jpoblete.cl
-      paths: ['/helloworld']
+      http:
+      paths:
+      - path: /helloworld
+        backend:
+          serviceName: helloworld
+          servicePort: 8080
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
