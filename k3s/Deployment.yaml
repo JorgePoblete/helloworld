@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: helloworld
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: helloworld
+    app.kubernetes.io/version: 1.16.0
+    argocd.argoproj.io/instance: helloworld
+    helm.sh/chart: helloworld-0.1.0
+  name: helloworld
+  namespace: default
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: helloworld
+      app.kubernetes.io/name: helloworld
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: helloworld
+        app.kubernetes.io/name: helloworld
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: node/deploy-type
+                    operator: In
+                    values:
+                      - microservice
+              weight: 1
+      containers:
+        - image: 'jorgepoblete/helloworld:1.0.13'
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          name: helloworld
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources: {}
+          securityContext: {}
+      imagePullSecrets:
+        - name: dockerhub
+      securityContext: {}
+      serviceAccountName: helloworld
+      tolerations:
+        - effect: NoSchedule
+          key: node/deploy-type
+          operator: Equal
+          value: microservice

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rewrite-target: /
+  labels:
+    app.kubernetes.io/instance: helloworld
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: helloworld
+    app.kubernetes.io/version: 1.16.0
+    argocd.argoproj.io/instance: helloworld
+    helm.sh/chart: helloworld-0.1.0
+  name: helloworld
+  namespace: default
+spec:
+  rules:
+    - host: api.jpoblete.cl
+      http:
+        paths:
+          - backend:
+              serviceName: helloworld
+              servicePort: 8080
+            path: /helloworld
