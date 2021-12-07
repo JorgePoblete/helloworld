@@ -46,7 +46,13 @@ spec:
             httpGet:
               path: /
               port: http
-          resources: {}
+          resources:
+            requests:
+              memory: "50mi"
+              cpu: "500m"
+            limits:
+              memory: "500mi"
+              cpu: "2000m"
           securityContext: {}
       imagePullSecrets:
         - name: dockerhub
