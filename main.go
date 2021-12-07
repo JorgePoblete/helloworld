@@ -14,6 +14,11 @@ func main() {
 		ctx.StatusCode(iris.StatusOK)
 	})
 
+	app.Get("/", func(ctx iris.Context) {
+		ctx.Application().Logger().Info(ctx.Request().URL)
+		ctx.StatusCode(iris.StatusOK)
+	})
+
 	app.Get("/metrics", func(ctx iris.Context) {
 		promhttp.Handler().ServeHTTP(ctx.ResponseWriter(), ctx.Request())
 	})
