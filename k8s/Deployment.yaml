@@ -48,10 +48,10 @@ spec:
               port: http
           resources:
             requests:
-              memory: "50mi"
+              memory: "50Mi"
               cpu: "500m"
             limits:
-              memory: "500mi"
+              memory: "500Mi"
               cpu: "2000m"
           securityContext: {}
       imagePullSecrets:
