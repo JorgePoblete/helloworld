@@ -9,6 +9,7 @@ import (
 
 func main() {
 	app := iris.New()
+	app.Logger().SetLevel("debug")
 
 	app.Get("/healthcheck", func(ctx iris.Context) {
 		ctx.StatusCode(iris.StatusOK)
