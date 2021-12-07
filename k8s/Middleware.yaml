@@ -8,5 +8,5 @@ metadata:
     app.kubernetes.io/version: 1.16.0
 spec:
   replacePathRegex:
-    regex: ^/helloworld/(.*)
-    replacement: /$1
+    regex: '^/helloworld/(.*)'
+    replacement: '/$1'
