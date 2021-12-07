@@ -9,4 +9,4 @@ metadata:
 spec:
   replacePathRegex:
     regex: '^/helloworld/(.*)'
-    replacement: '/$1'
+    replacement: '/healthcheck'
