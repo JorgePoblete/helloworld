@@ -13,7 +13,7 @@ spec:
     - host: api.jpoblete.cl
       http:
         paths:
-          - path: /helloworld
+          - path: /helloworld/
             pathType: ImplementationSpecific
             backend:
               service:
