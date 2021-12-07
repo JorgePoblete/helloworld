@@ -11,7 +11,7 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-      - /helloworld
+      - /helloworld/
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
