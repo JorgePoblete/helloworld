@@ -1,35 +1,32 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"net/http"
 
+	"github.com/kataras/iris/v12"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
-	http.Handle("/metrics", promhttp.Handler())
-	http.HandleFunc("/hello", hello)
-	http.HandleFunc("/healthcheck", healthcheck)
-	http.HandleFunc("/", hello)
-	http.ListenAndServe(":8080", nil)
-}
+	app := iris.New()
 
-func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	log.Printf("%s", r.URL)
-}
+	app.Get("/healthcheck", func(ctx iris.Context) {
+		ctx.StatusCode(iris.StatusOK)
+	})
 
-func healthcheck(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-}
+	app.Get("/metrics", func(ctx iris.Context) {
+		promhttp.Handler().ServeHTTP(ctx.ResponseWriter(), ctx.Request())
+	})
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%s", r.URL)
-	count := 1
-	for i := 0; i <= 1000000; i++ {
-		count = i
-	}
-	fmt.Fprintf(w, "Hello, world %d times\n", count)
+	app.Get("/hello", func(ctx iris.Context) {
+		log.Printf("%s", ctx.Request().URL)
+		count := 1
+		for i := 0; i <= 1000000; i++ {
+			count = i
+		}
+		ctx.Text("Hello, world %d times\n", count)
+		ctx.StatusCode(iris.StatusOK)
+	})
+
+	app.Listen(":8080")
 }
