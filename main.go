@@ -10,6 +10,9 @@ import (
 func main() {
 	app := iris.New()
 	app.Logger().SetLevel("debug")
+	app.OnErrorCode(iris.StatusNotFound, func(ctx iris.Context) {
+		ctx.Application().Logger().Info(ctx.Request().URL)
+	})
 
 	app.Get("/healthcheck", func(ctx iris.Context) {
 		ctx.StatusCode(iris.StatusOK)
