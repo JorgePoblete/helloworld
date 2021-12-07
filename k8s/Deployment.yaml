@@ -32,7 +32,7 @@ spec:
               weight: 1
       containers:
         - image: "jorgepoblete/helloworld:1.0.15"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /healthcheck

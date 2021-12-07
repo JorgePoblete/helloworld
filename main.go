@@ -12,7 +12,13 @@ func main() {
 	http.Handle("/metrics", promhttp.Handler())
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/healthcheck", healthcheck)
+	http.HandleFunc("/", hello)
 	http.ListenAndServe(":8080", nil)
+}
+
+func defaultHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	log.Printf("%s", r.URL)
 }
 
 func healthcheck(w http.ResponseWriter, r *http.Request) {
