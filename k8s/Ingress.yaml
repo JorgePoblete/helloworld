@@ -5,6 +5,8 @@ metadata:
     app.kubernetes.io/instance: helloworld
     app.kubernetes.io/name: helloworld
     app.kubernetes.io/version: 1.16.0
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: helloworld-stripprefix
   name: helloworld
   namespace: default
 
