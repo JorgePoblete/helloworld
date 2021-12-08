@@ -48,11 +48,11 @@ spec:
               port: http
           resources:
             requests:
-              memory: "50Mi"
-              cpu: "500m"
+              memory: "128Mi"
+              cpu: "250m"
             limits:
               memory: "500Mi"
-              cpu: "2000m"
+              cpu: "500m"
           securityContext: {}
       imagePullSecrets:
         - name: dockerhub
