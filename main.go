@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"math"
 
 	"github.com/kataras/iris/v12"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -29,9 +30,9 @@ func main() {
 
 	app.Get("/hello", func(ctx iris.Context) {
 		log.Printf("%s", ctx.Request().URL)
-		count := 1
+		count := 1.0
 		for i := 0; i < 1000000; i++ {
-			count = i
+			count += math.Sqrt(count)
 		}
 		ctx.Text("Hello, world %d times\n", count)
 		ctx.StatusCode(iris.StatusOK)
