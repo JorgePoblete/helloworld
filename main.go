@@ -34,7 +34,7 @@ func main() {
 		for i := 0; i < 1000000; i++ {
 			count += math.Sqrt(count)
 		}
-		ctx.Text("Hello, world %d times\n", count)
+		ctx.Text("Hello, world %.10f times\n", count)
 		ctx.StatusCode(iris.StatusOK)
 	})
 
