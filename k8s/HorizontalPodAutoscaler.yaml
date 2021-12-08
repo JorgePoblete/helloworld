@@ -4,7 +4,7 @@ metadata:
   name: helloworld
   namespace: default
 spec:
-  maxReplicas: 10
+  maxReplicas: 50
   metrics:
   - resource:
       name: cpu
