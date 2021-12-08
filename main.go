@@ -31,7 +31,7 @@ func main() {
 	app.Get("/hello", func(ctx iris.Context) {
 		log.Printf("%s", ctx.Request().URL)
 		count := 1.0
-		for i := 0; i < 1000000; i++ {
+		for i := 0; i < 100000; i++ {
 			count += math.Sqrt(count)
 		}
 		ctx.Text("Hello, world %.10f times\n", count)
