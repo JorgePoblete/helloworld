@@ -6,10 +6,6 @@ metadata:
     app.kubernetes.io/instance: helloworld
     app.kubernetes.io/name: helloworld
     app.kubernetes.io/version: 1.16.0
-  annotations:
-    kubernetes.io/ingress.class: traefik-internal
-    traefik.ingress.kubernetes.io/router.entrypoints: web
-    traefik.ingress.kubernetes.io/router.middlewares: capabilities-stripprefix@kubernetescrd
 spec:
   stripPrefix:
     prefixes:
