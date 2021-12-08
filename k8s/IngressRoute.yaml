@@ -11,7 +11,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`api.jpoblete.cl`) && PathPrefix(`/helloworld`)
+    - match: Host(`api.jpoblete.cl`)
       kind: Rule
       middlewares:
         - name: helloworld-stripprefix
