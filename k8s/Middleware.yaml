@@ -9,5 +9,5 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-      - "/helloworld"
+      - /helloworld
     forceSlash: false
