@@ -32,6 +32,9 @@ spec:
               weight: 1
       containers:
         - image: "jorgepoblete/helloworld:1.0.17"
+          env:
+            - REDIS_HOST: helloworld-redis
+              REDIS_PORT: 6379
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
