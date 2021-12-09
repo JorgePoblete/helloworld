@@ -33,6 +33,11 @@ spec:
       containers:
         - image: "jorgepoblete/helloworld:1.0.17"
           imagePullPolicy: Always
+          env:
+            - name: REDIS_HOST
+              value: "helloworld-redis"
+            - name: REDIS_PORT
+              value: "6379"
           livenessProbe:
             httpGet:
               path: /healthcheck
