@@ -9,6 +9,11 @@ metadata:
   namespace: default
 spec:
   replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: helloworld-redis
+      app.kubernetes.io/name: helloworld-redis
   template:
     metadata:
       labels:
